@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BazzarHive - E-commerce Website</title>
+  <style>
+    :root {
+      --primary-color: #7f5539;
+      --text-color: #000000;
+      --bg-color: #faedcd;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color:#ede0d4 ;
+      color: #004b23;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ddb892;
+      color: #7f5539;
+      padding: 0.8rem 1rem;
+      flex-wrap: wrap;
+    }
+
+    .top-nav .logo {
+      /* font-size: 1.5rem;
+      font-weight: bold; */
+      width: 150px;
+      width: 150px;
+    }
+
+    .top-nav nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .top-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .signup-btn, .cart-btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .signup-btn:hover, .cart-btn:hover {
+      background-color: #9c6644;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .search-bar input {
+      padding: 0.4rem;
+      border-radius: 4px;
+      border: none;
+    }
+
+    .search-bar button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .category-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      background-color: #e6ccb2;
+      padding: 1rem;
+    }
+
+    .category-nav a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin: 2rem 1rem 1rem;
+      color: var(--primary-color);
+    }
+
+    .container {
+      padding: 0 1rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .card h5 {
+      margin: 1rem 0 0.5rem;
+      text-align: justify;
+    }
+
+    .card p {
+      color: #dc0000;
+    }
+
+    footer {
+      background-color: #ddb892;
+      color: #7f5539;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 2rem 1rem;
+    }
+
+    footer div {
+      margin: 1rem 0;
+      min-width: 200px;
+    }
+
+    footer h4 {
+      margin-bottom: 0.5rem;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .copyright {
+      background-color: #7f5539;
+      color: #ffffff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .card .add-to-cart-btn {
+      background-color: #9c6644;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    .card .add-to-cart-btn:hover {
+      background-color: #ddb892;
+    }
+
+    @media (max-width: 600px) {
+      .top-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .top-nav nav {
+        justify-content: flex-start;
+      }
+      .category-nav {
+        flex-direction: column;
+      }
+      .search-bar {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+  <script>
+    function searchProduct() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.querySelectorAll(".card");
+      let found = false;
+      cards.forEach(card => {
+        const productName = card.querySelector("h5").textContent.toLowerCase();
+        if (productName.includes(query)) {
+          card.scrollIntoView({ behavior: "smooth" });
+          card.style.border = "2px solid yellow";
+          found = true;
+          setTimeout(() => card.style.border = "1px solid #ccc", 2000);
+        }
+      });
+      if (!found) alert("Product not found!");
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Welcome to BazzarHive</h1>
+    <p>Your One-Stop Shop for Everything!</p>
+  </header>
+
+  <div class="top-nav">
+    <img class="logo" src="9kh_-removebg-preview.png"/>
+    <!-- <div class="logo">BazzarHive</div> -->
+    <nav>
+      <a href="about.html">About</a>
+      <a href="todays-deals.html">Today's Deals</a>
+      <a href="#">Customer Services</a>
+      <a href="#">Gift Cards</a>
+      <a href="registry.html">Registry</a>
+      <a href="#">Sell</a>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search products...">
+        <button onclick="searchProduct()">Search</button>
+      </div>
+      <a href="signup.html"><button class="signup-btn">Sign Up</button></a>
+      <a href="cart.html"><button class="cart-btn">Cart</button></a>
+    </nav>
+  </div>
+
+  <div class="category-nav">
+    <a href="#">Clothes</a>
+    <a href="#">Electronics</a>
+    <a href="#">Industrial Equipment</a>
+    <a href="#">Beauty Products</a>
+    <a href="#">Home & Kitchen</a>
+    <a href="#">More</a>
+  </div>
+
+  <h2 class="section-title">Bestsellers</h2>
+  <section class="container">
+    <div class="card">
+      <img src="camping bag_.jpg" alt="camping" />
+      <h5>TriPole Colonel Pro Metal Frame Rucksack with Detachable Day Pack and Rain Cover for Trekking and Travelling | 5 Year Warranty</h5>
+      <p>-21% ₹4,339</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="boat1.webp" alt="boat1" />
+      <h5>boAt Wave Call 2 Plus Smart Watch w/Bilingual Support (Hindi/English), 1.96”(4.97 cm) HD Display, BT Calling, 100+Sports Modes, Animated Watch Faces, Voice Assistant(Active Black)</h5>
+      <p>₹1,299</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="airdrop1.webp" alt="airdrop1" />
+      <h5>boAt Airdopes 141 / Airdopes 148, Low Latency, ENx Tech, 42HRS Battery, Fast Charge, IWP, IPX4, v5.1 Bluetooth Earbuds, TWS Ear Buds Wireless Earphones with mic (Bold Black)</h5>
+      <p>-76% ₹1,099</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="boult1.jpg" alt="boult1" />
+      <h5>Boult Audio W20 Truly Wireless in Ear Earbuds with 40H Playtime, Zen™ ENC Mic, 45ms Low Latency, 13mm Bass Drivers, Type-C Fast Charging, Made in India, Touch Control, IPX5 ear buds TWS (Glacier Blue)</h5>
+      <p>-68% ₹799</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="bhagawat.jpg" alt="bhagawat" />
+      <h5>Shrimad Bhagwat Geeta Yatharoop (Hindi) Hardcover – Big Book</h5>
+      <p>-46% ₹259</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="ramayan.jpg" alt="ramayan" />
+      <h5>Shri Ram Charitmanas Gita Press Ramcharitmanas, Tulsidas Krit Ramcharitmanas, Code-81,(Hardcover, Hindi, Goswami Tulsidas)</h5>
+      <p>-7% ₹420</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="godan.jpg" alt="godan" />
+      <h5>Godan Hardcover Hindi Edition. Get 5% back with Amazon Pay ICICI Bank credit card for Prime members. 3% back for others. Not applicable on EMI orders and Amazon business transactions.</h5>
+      <p>-51% ₹245</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="sword.jpg" alt="sword" />
+      <h5>Royal Action Katari For Groom With Multicolor Meenakari Design Rajputana Style Made Of Metal (Non Sharp), 7.09 Inch, 2.5 cm</h5>
+      <p>-37% ₹948</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="fridge.jpg" alt="fridge" />
+      <h5>Godrej 600 L, 3 Star, 1+2 Years Additional Warranty, Smart Convertible Zones, Toughened Glass Door Frost Free Inverter Side By Side Refrigerator(2025 Model, RS EONVELVET 646C RIT OP BK, Opera Black)</h5>
+      <p>-40% ₹69,990</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="blue drum.webp" alt="Washing Machine" />
+      <h5>Rahul Scrap Dealers Plastic Water Barrel Storage Drum/Container, 30 Liters (Height 550 mm Dia 400 mm_Blue, Pack of 2)</h5>
+      <p>-47% ₹1,800</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+  </section>
+
+  <h2 class="section-title">Best Sellers in Clothing & Accessories</h2>
+  <section class="container">
+    <div class="card">
+      <img src="boat2.jpg" alt="boAt" />
+      <h5>boAt Lunar Discovery w/ 1.39" (3.5 cm) HD Display, Turn-by-Turn Navigation, DIY Watch Face Studio, Bluetooth Calling, Emergency SOS, QR Tray, Smart Watch for Men & Women(Brown)</h5>
+      <p>-84% ₹1,399</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="shirt1.webp" alt="shirt1" />
+      <h5>TAGDO Regular Fit Shirt For Men (Polyester | Pack of 1 )</h5>
+      <p>-74% ₹359</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="jacket1.jpg" alt="jacket1" />
+      <h5>TAGAS Men's Regular Fit Zip-Up Casual Jacket for MENS || Bomber Jacket for Men || Latest Stylish Jacket For Men ||Men's Regular Fit Zip-Up Casual jacket|| bomber jacket for men (MJ-9090)</h5>
+      <p>-70% ₹749</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="poshak1.jpg" alt="poshak1" />
+      <h5>Women's Embroidered Georgette Ethnic Wear Semi-stitched Rajasthani Rajputi Poshak Lehenga Choli With Dupatta Set-HOME</h5>
+      <p>-50% ₹1,499</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="poshak2.webp" alt="poshak2" />
+      <h5>VARNI FABRICS: A lady's First Love Womens Net Lehenga Choli With Embroidered Work with cancan</h5>
+      <p>-51% ₹3,399</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="jeans1.jpg" alt="jeans1" />
+      <h5>JVX Jeans for Men || MenJeans || MenJeans Pants || DenimJeans (NJJ-05)</h5>
+      <p>-80% ₹799</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="shoes.jpg" alt="shoes" />
+      <h5>Chelsea Boots for Men | Soft Cushioned Insole, Slip-Resistance, Dynamic Feet Support, Arch Support & Shock Absorption</h5>
+      <p>-76% ₹1,187</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="shoes2.jpg" alt="shoes2" />
+      <h5>FAUSTO Men's High Ankle Zipper Closure Fashion Trend Classic Work Boots (6-13 UK)</h5>
+      <p>-62% ₹1,533</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="safa.webp" alt="safa" />
+      <h5>Rajasthani Safa –Authentic Indian Headwear, Stylish & Comfortable, Perfect for Weddings, Cultural Events & Festivities, Showcasing Rich Heritage & Craftsmanship, Ideal for Men’s Fashion</h5>
+      <p>-12% ₹900</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="saree1.jpg" alt="saree1" />
+      <h5>MANOHARI Banarasi Silk Traditional saree with Unstitch Heavy Blouse Piece</h5>
+      <p>-72% ₹1,799</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+  </section>
+
+  <h2 class="section-title">Budget-Friendly Finds | Up to 50% Off</h2>
+  <section class="container">
+    <div class="card">
+      <img src="handbag.webp" alt="handbag" />
+      <h5>INOVERA (LABEL) Women Inovera Faux Leather Handbags Shoulder Hobo Bag Ladies Big Purse With Long Strap</h5>
+      <p>-50% ₹1,349</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="shoes women.jpg" alt="shoes" />
+      <h5>Mochi Women's Gold Ethnic Faux Leather Slip On Fashion Heel Sandals</h5>
+      <p>-59% ₹701</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="boat4.jpg" alt="boAt" />
+      <h5>boAt New Launch Ultima Ember Smartwatch w/ 1.96” (4.97 cm) AMOLED Display, Personalized Fitness Nudges, Functional Crown, 100+ Sports Modes, Custom Watch Faces (Bold Black)</h5>
+      <p>-50% ₹1,999</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="mouse.jpg" alt="mouse" />
+      <h5>amazon basics 2.4GHz Wireless + Bluetooth 5.1 Mouse, Multi-Device Dual Mode Slim Rechargeable Silent Click Buttons Wireless Bluetooth Mouse, 3 Adjustable DPI</h5>
+      <p>-53% ₹521</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="laptop.jpg" alt="laptop" />
+      <h5>ASUS Vivobook 15,13th Gen,Intel Core i5-13420H(Intel UHD iGPU/16GB RAM/512GB SSD/FHD/15.6"/60Hz/Backlit Keyboard/Windows 11/M365 Basic (1Year)*/Office Home 2024/Cool Silver/1.70 kg) X1502VA-BQ835WS</h5>
+      <p>-50% ₹53,990</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="keyboard.jpg" alt="keyboard" />
+      <h5>Wired Keyboard, Full-Sized Typewriter Keyboards, USB Plug and Play Office Keyboard with Number Pad, Caps Indicators, Foldable Stands for Windows, PC, Laptop, Desktop (Blue Colorful)</h5>
+      <p>-50% ₹7,285.67</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="speaker.webp" alt="speaker" />
+      <h5>amazon basics B10 10W RMS Bluetooth Speaker with 2000 mAh Battery | Up to 8 hrs of Playback | RGB | Bluetooth 5.3, AUX in, USB & Micro SD Card Connectivity | Type-C Charging (Black)</h5>
+      <p>-48% ₹1,299</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="carvaan.jpg" alt="carvaan" />
+      <h5>Saregama Carvaan Premium Hindi - Portable Music Player with 5000 Preloaded Songs, FM/BT/AUX (Emerald Green)</h5>
+      <p>-50% ₹7,990</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="coat 1.jpg" alt="coat" />
+      <h5>Peter England Neo-Slim Fit Solid Blazer</h5>
+      <p>-50% ₹2,949</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="lakme.jpg" alt="lakme" />
+      <h5>Lakme Eyeconic Lash Curling Mascara, Black, 9ml</h5>
+      <p>-63% ₹166</p>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <h4>Get to Know Us</h4>
+      <ul>
+        <li>About BazzarHive</li>
+        <li>Careers</li>
+        <li>Press Releases</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect with Us</h4>
+      <ul>
+        <li>Facebook</li>
+        <li>Twitter</li>
+        <li>Instagram</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Let Us Help You</h4>
+      <ul>
+        <li>Your Account</li>
+        <li>Returns Centre</li>
+        <li>Help</li>
+      </ul>
+    </div>
+  </footer>
+  <div class="copyright">
+    &copy; 2025 BazzarHive. All rights reserved.
+  </div>
+  <script>
+    const products = [
+      { name: "Men's Shirt", price: "Rs. 799", image: "https://via.placeholder.com/250x150?text=Shirt" },
+      { name: "Smartphone", price: "Rs. 14,999", image: "https://via.placeholder.com/250x150?text=Smartphone" },
+      { name: "Washing Machine", price: "Rs. 15,499", image: "https://via.placeholder.com/250x150?text=Washing+Machine" },
+    ];
+
+    const clothes = [
+      { name: "Winter Jacket", price: "Rs. 2,199", image: "https://via.placeholder.com/250x150?text=Jacket" },
+      { name: "Running Shoes", price: "Rs. 1,899", image: "https://via.placeholder.com/250x150?text=Shoes" },
+    ];
+
+    function loadProducts(list, containerId) {
+      const container = document.getElementById(containerId);
+      list.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" />
+          <h3>${product.name}</h3>
+          <p>${product.price}</p>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    loadProducts(products, "product-list");
+    loadProducts(clothes, "clothing-list");
+  </script>
+</body>
+</html>
+
+
+
+

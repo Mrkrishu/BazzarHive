@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BazzarHive Secure Checkout</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #ddb892;
+      color: #111;
+      /* padding: 20px; */
+    }
+
+    header {
+      background-color: #7f5539;
+      color: #f3f3f3;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+      flex-wrap: wrap;
+    }
+
+    .payment-section, .summary-box {
+      background: #ede0d4;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .payment-section {
+      flex: 2;
+      min-width: 300px;
+    }
+
+    .summary-box {
+      flex: 1;
+      min-width: 280px;
+      max-height: 160px;
+      align-self: flex-start;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .method {
+      border: 1px solid #804b4b;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      padding: 15px;
+    }
+
+    .method input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .method label {
+      display: block;
+      margin: 8px 0;
+    }
+
+    .method .icons img {
+      height: 24px;
+      margin-right: 8px;
+    }
+
+    .use-button {
+      background-color: #ddb892;
+      border: 1px solid #fcd200;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .review {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .summary-box {
+        max-width: 100%;
+      }
+    }
+
+    footer {
+      background-color: #ede0d4;
+      color: #68442c;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 2rem 1rem;
+    }
+
+    footer div {
+      margin: 1rem 0;
+      min-width: 200px;
+    }
+
+    footer h4 {
+      margin-bottom: 0.5rem;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .copyright {
+      background-color: #7f5539;
+      color: #ffffff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to BazzarHive</h1>
+        <p>Your One-Stop Shop for Everything!</p>
+      </header><br>
+  <div class="container">
+    <div class="payment-section">
+      <h2>Secure Checkout - BazzarHive</h2>
+      <p><strong>Delivering to:</strong> Krishna Dinanath Choudhari<br>Hanuman Kripa Building, Navi Mumbai, Maharashtra, 400706</p><br>
+
+      <div class="method">
+        <input type="radio" name="payment" id="card" checked />
+        <label for="card">Credit or Debit Card</label>
+        <div class="icons">
+          <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" />
+          <img src="https://img.icons8.com/color/48/mastercard.png" alt="Mastercard" />
+          <img src="https://img.icons8.com/color/48/rupay.png" alt="Rupay" />
+        </div>
+      </div>
+
+      <div class="method">
+        <input type="radio" name="payment" id="netbanking" />
+        <label for="netbanking">Net Banking</label>
+        <div class="icons">
+            <img src="state_bank_of_india-logo-brandlogos.net_.png" alt="SBI" />
+            <img src="Kotak_Mahindra_Bank_logo.png" alt="Kotak Mahindra Bank" />
+            <img src="HDFC-Bank-Limited-Symbol.png" alt="HDFC Bank" />
+          </div>
+      </div>
+
+      <div class="method">
+        <input type="radio" name="payment" id="upi" />
+        <label for="upi">Other UPI Apps</label>
+        <div class="icons">
+            <img src="https://img.icons8.com/color/48/google-pay.png" alt="Google Pay" />
+            <img src="ph.jpg" alt="PhonePe" />
+            <img src="https://img.icons8.com/color/48/paytm.png" alt="Paytm" />
+          </div>
+      </div>
+
+      <div class="method">
+        <input type="radio" name="payment" id="cod" />
+        <label for="cod">Cash on Delivery / Pay on Delivery</label>
+      </div>
+
+      <button class="use-button">Use this payment method</button>
+
+      <div class="review">
+        <p>Once your order is placed, you’ll receive an email confirmation and we’ll start processing it immediately.</p>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>Order Summary</h3>
+      <p>Items: <span style="float:right">5</span></p>
+      <p>Delivery: <span style="float:right">23 April</span></p>
+      <hr />
+      <p><strong>Order Total:</strong> <span style="float:right">₹8,765</span></p>
+    </div>
+  </div><br>
+
+  <script>
+    const buttons = document.querySelectorAll('input[type="radio"]');
+    buttons.forEach(btn => {
+      btn.addEventListener('change', () => {
+        console.log(`Selected payment method: ${btn.id}`);
+      });
+    });
+  </script>
+  <footer>
+    <div>
+      <h4>Get to Know Us</h4>
+      <ul>
+        <li>About BazzarHive</li>
+        <li>Careers</li>
+        <li>Press Releases</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect with Us</h4>
+      <ul>
+        <li>Facebook</li>
+        <li>Twitter</li>
+        <li>Instagram</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Let Us Help You</h4>
+      <ul>
+        <li>Your Account</li>
+        <li>Returns Centre</li>
+        <li>Help</li>
+      </ul>
+    </div>
+  </footer>
+  <div class="copyright">
+    &copy; 2025 BazzarHive. All rights reserved.
+  </div>
+</body>
+</html>

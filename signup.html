@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Welcome to BazzarHive</h1>
+    <p>Your One-Stop Shop for Everything!</p>
+    <nav>
+      <a href="web.html">Home</a>
+      <a href="signup.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </nav>
+  </header>
+
+  <!-- Sign Up Section -->
+  <section class="signup-container">
+    <div class="signup-form-box">
+      <div class="form-left">
+        <h2>Sign Up</h2>
+        <form action="/signup" method="POST">
+          <input type="text" name="username" placeholder="Username" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="password" name="password" placeholder="Password" required>
+          <input type="password" placeholder="Retype Password" required>
+          <button type="submit">Submit</button>
+        </form>
+        
+      </div>
+      <div class="form-right">
+        <h2>Sign in with<br>Social Network</h2>
+        <button class="facebook">Log in with Facebook</button>
+        <button class="twitter">Log in with Twitter</button>
+        <button class="google">Log in with Google+</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy;  2025 BazzarHive. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
